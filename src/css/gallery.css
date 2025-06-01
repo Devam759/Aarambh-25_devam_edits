@@ -95,12 +95,20 @@
     margin-bottom: 1rem;
     color: #070101; /* white text */
 }
+.gallery-title {
+  /* font-family: 'SpaceGrotesk-SemiBold', sans-serif; */
+  font-size: 2.5rem;
+  color: var(--primary-base);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
 .gallery-description {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1.2rem;
-    
-    color: #666;
+  /* font-family: 'calora', sans-serif; */
+  font-size: 1.1rem;
+  color: var(--primary-60);
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 .gallery-filters {

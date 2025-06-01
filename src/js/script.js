@@ -268,8 +268,118 @@ function toggleFaq(element) {
 
     // Download Checklist (Placeholder for actual PDF generation)
     function downloadChecklist() {
-        alert('Download PDF functionality is a placeholder. You would typically generate a PDF from the checklist items here.');
-        // In a real application, you would use a library like jsPDF or send data to a backend to generate a PDF.
+        // Create a new jsPDF instance
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        // Set initial position and constants
+        let yPos = 20;
+        const lineHeight = 8;
+        const margin = 20;
+        const pageWidth = doc.internal.pageSize.width;
+        const pageHeight = doc.internal.pageSize.height;
+        
+        // Add university logo (if available)
+        // doc.addImage('path_to_logo.png', 'PNG', margin, yPos, 30, 30);
+        
+        // Add title with proper formatting
+        doc.setFontSize(24);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(26, 54, 54); // Dark teal color
+        doc.text('Essential Packing Checklist', pageWidth/2, yPos, { align: 'center' });
+        yPos += lineHeight * 2;
+        
+        // Add subtitle
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(100, 100, 100); // Gray color
+        doc.text('JK Lakshmipat University - Aarambh 2025', pageWidth/2, yPos, { align: 'center' });
+        yPos += lineHeight * 2;
+        
+        // Add date and time
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+        const timeStr = now.toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        });
+        doc.setFontSize(10);
+        doc.text(`Generated on: ${dateStr} at ${timeStr}`, pageWidth/2, yPos, { align: 'center' });
+        yPos += lineHeight * 2;
+        
+        // Add introduction text
+        doc.setFontSize(11);
+        doc.setTextColor(60, 60, 60); // Dark gray
+        const introText = 'This checklist will help you prepare for your university journey. Mark items as you pack them to ensure you have everything you need.';
+        const splitIntro = doc.splitTextToSize(introText, pageWidth - (margin * 2));
+        doc.text(splitIntro, margin, yPos);
+        yPos += lineHeight * (splitIntro.length + 1);
+        
+        // Get all checklist categories
+        const categories = document.querySelectorAll('.checklist-category');
+        
+        categories.forEach(category => {
+            const categoryTitle = category.querySelector('h4').textContent;
+            const items = category.querySelectorAll('.checklist-item');
+            
+            // Check if we need a new page
+            if (yPos > pageHeight - margin) {
+                doc.addPage();
+                yPos = margin;
+            }
+            
+            // Add category title with styling
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(26, 54, 54); // Dark teal color
+            doc.text(categoryTitle, margin, yPos);
+            yPos += lineHeight * 1.5;
+            
+            // Add items with proper formatting
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(60, 60, 60); // Dark gray
+            
+            items.forEach(item => {
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                const itemText = item.textContent.trim();
+                const isChecked = checkbox.checked;
+                
+                // Check if we need a new page
+                if (yPos > pageHeight - margin) {
+                    doc.addPage();
+                    yPos = margin;
+                }
+                
+                // Add checkbox symbol and item text with proper spacing
+                const checkboxSymbol = isChecked ? '☑' : '☐';
+                doc.text(`${checkboxSymbol}  ${itemText}`, margin + 5, yPos);
+                yPos += lineHeight;
+            });
+            
+            yPos += lineHeight; // Add space between categories
+        });
+        
+        // Add footer with page numbers
+        const pageCount = doc.internal.getNumberOfPages();
+        for (let i = 1; i <= pageCount; i++) {
+            doc.setPage(i);
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100); // Gray color
+            
+            // Add page number
+            doc.text(`Page ${i} of ${pageCount}`, pageWidth/2, pageHeight - 10, { align: 'center' });
+            
+            // Add university name in footer
+            doc.text('JK Lakshmipat University', pageWidth/2, pageHeight - 5, { align: 'center' });
+        }
+        
+        // Save the PDF
+        doc.save('aarambh-2025-packing-checklist.pdf');
     }
 
 

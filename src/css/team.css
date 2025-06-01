@@ -394,40 +394,30 @@
 }
 
 .team-member h3 {
-  font-size: 1.4rem;
-  color: #8D0B41;
-  margin-bottom: 8px;
+  /* font-family: 'SpaceGrotesk-SemiBold', sans-serif; */
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: var(--primary-base);
 }
 
 .team-member .role {
-  font-weight: 600;
-  color: #A03461;
-  font-size: 1.1rem;
-  margin-bottom: 12px;
+  /* font-family: 'losta masta', serif; */
+  font-size: 0.9rem;
+  color: var(--secondary-base);
+  margin-bottom: 0.5rem;
 }
 
 .team-member .bio {
-  color: #666;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  margin: 0;
-  flex-grow: 1;
-  text-align: center;
-  padding: 0 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 100%;
-  margin-bottom: 20px;
+  /* font-family: 'Calora', sans-serif; */
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--primary-70);
 }
 
 .team-member .contact-info {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: auto;
-  width: 100%;
-  padding: 0 10px;
+  /* font-family: 'Arial', Helvetica, sans-serif; */
+  font-size: 0.9rem;
+  color: var(--primary-60);
 }
 
 .team-member .contact-info a {
@@ -822,4 +812,16 @@
   .footer-section h3::after {
     left: 50%;
 }
+}
+
+.team-member .social-links a {
+  /* font-family: 'Calora', sans-serif; */
+  font-size: 0.9rem;
+  color: var(--primary-60);
+}
+
+.team-member .contact-info p {
+  /* font-family: 'Arial', Helvetica, sans-serif; */
+  font-size: 0.9rem;
+  color: var(--primary-60);
 }

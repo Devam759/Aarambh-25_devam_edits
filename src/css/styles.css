@@ -55,7 +55,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'SpaceGrotesk-SemiBold', sans-serif;
+  /* font-family: 'SpaceGrotesk-SemiBold', sans-serif; */
   background: linear-gradient(135deg, var(--secondary-20) 0%, var(--secondary-30) 100%);
   line-height: 1.6;
   overflow-x: hidden;
@@ -172,7 +172,7 @@ body {
 .nav-links li a {
   color: var(--secondary-10);
   text-decoration: none;
-  font-family: 'SpaceGrotesk-SemiBold', sans-serif;
+  /* font-family: 'SpaceGrotesk-SemiBold', sans-serif; */
   font-weight: 500;
   padding: 0.5rem 1rem;
   transition: background 0.3s, color 0.3s;
@@ -245,42 +245,33 @@ body {
 
 
 .logo-image {
-  height: 180px;
-  width: auto;
-  margin: 0 0 2rem 0;
-  z-index: 99;
-  animation: heroLogoFloat 6s ease-in-out infinite;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-  transition: transform 0.1s ease-out;
-  will-change: transform;
+  width: 400px;
+  height: auto;
+  margin: 1rem 0;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
 }
 
-
-@keyframes heroLogoFloat {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-10px) scale(1.02); }
-}
 .hero-text {
   position: relative;
   z-index: 2;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
-  color: white;
-  animation: fadeIn 2s ease-in-out;
-  max-width: 800px;
-  padding: 1rem;
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .jklu-brand {
-  font-size: 1.5rem;
-  font-weight: 300;
-  letter-spacing: 2px;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-  color: #fff;
+  font-size: 1.2rem;
+  color: var(--secondary-10);
   text-transform: uppercase;
-  padding-top: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
 }
 
 .date-badge {
@@ -290,57 +281,48 @@ body {
   border-radius: 50px;
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  margin: 0 0 1.5rem 0;
+  gap: 0.8rem;
+  margin: 1rem 0;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .date-badge:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
 .date-badge i {
-  font-size: 2rem;
-  color: var(--secondary-base);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--secondary-10);
+  font-size: 1.2rem;
 }
 
 .date-badge span {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #fff;
+  color: var(--secondary-10);
+  font-size: 1.1rem;
+  font-weight: 500;
   letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-text h3 {
-  font-size: clamp(1.2rem, 3vw, 1.8rem);
-  font-weight: 600;
-  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  color: var(--secondary-10);
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: white;
-  animation: fadeInUp 1.5s ease-out 0.8s both;
+  margin: 1rem 0;
+  font-weight: 600;
 }
 
 .tagline-container {
-  margin-top: 0.5rem;
-  animation: fadeInUp 1.5s ease-out 1s both;
+  margin-top: 1rem;
 }
 
 .tagline {
-  font-size: 1rem;
+  font-size: 1.2rem;
+  color: var(--secondary-10);
   font-style: italic;
-  color: #D39D55; /* Golden */
-
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.4;
-    animation: fadeIn 2s ease-in-out;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Animation */
@@ -451,7 +433,7 @@ body {
   margin-bottom: 3rem;
   color: white;
   text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
-  font-family: 'SpaceGrotesk-SemiBold', sans-serif;
+  /* font-family: 'SpaceGrotesk-SemiBold', sans-serif; */
   position: relative;
   display: inline-block;
   transform: rotate(-2deg);
@@ -734,7 +716,7 @@ body {
   color: rgb(255, 253, 253);
   padding: 120px 20px;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 .rules-section h2 {
@@ -749,7 +731,7 @@ body {
 .rules-section ul {
   list-style-type: none;
   padding: 0;
-  font-size: 1.3rem;
+  /* font-size: 1.3rem; */
   text-align: left;
   margin: 0 auto;
   max-width: 900px;
@@ -803,7 +785,7 @@ body {
 
 .schedule h2 {
   font-size: 3.5rem;
-  font-family: 'Rozha', serif;
+  /* font-family: 'Rozha', serif; */
   margin-bottom: 3rem;
   text-align: center;
   color: #fff;
@@ -957,7 +939,7 @@ body {
 
 .rolling-gallery h2 {
   font-size: 3.5rem;
-  font-family: 'Rozha', serif;
+  /* font-family: 'Rozha', serif; */
   margin-bottom: 1rem;
   color: #fff;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);

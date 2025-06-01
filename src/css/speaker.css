@@ -153,18 +153,21 @@
 }
 
 .speaker-info h3 {
+    /* font-family: 'SpaceGrotesk-SemiBold', sans-serif; */
     font-size: 1.5rem;
-    font-family: 'Calora', sans-serif;
-    margin-bottom: 10px;
+    margin: 1rem 0;
+    color: var(--primary-base);
 }
 
 .speaker-info .designation {
+    /* font-family: 'Calora', sans-serif; */
     font-size: 1.1rem;
     color: #e0a170;
     margin-bottom: 5px;
 }
 
 .speaker-info .company {
+    /* font-family: 'Calora', sans-serif; */
     font-size: 1rem;
     color: #D6BD98;
     margin-bottom: 20px;
@@ -186,4 +189,18 @@
 .social-links a:hover {
     color: #e0a170;
     text-decoration: none;
+}
+
+.speaker-card .role {
+  /* font-family: 'Calora', sans-serif; */
+  font-size: 1rem;
+  color: var(--secondary-base);
+  margin-bottom: 0.5rem;
+}
+
+.speaker-card .bio {
+  /* font-family: 'Calora', sans-serif; */
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--primary-70);
 }
