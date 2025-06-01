@@ -241,8 +241,7 @@ body {
   height: 100vh;
   object-fit: cover;
   z-index: 0;
-  
-
+  filter: brightness(0.8);
 }
 
 .overlay {
@@ -251,7 +250,7 @@ body {
   left: 0;
   height: 100vh;
   width: 100%;
-  background: rgba(69, 44, 8, 0.37); /* semi-transparent */
+  background: rgba(69, 44, 8, 0.5); /* slightly darker overlay for better text visibility */
   z-index: 1;
 }
 
