@@ -251,6 +251,7 @@ function toggleFaq(element) {
     // Initial call to set the correct progress on page load
     document.addEventListener('DOMContentLoaded', updateProgress);
 
+    /* Search functionality commented out as search box is not present
     // Basic search functionality for FAQ
     document.getElementById('searchInput').addEventListener('keyup', function() {
         const searchValue = this.value.toLowerCase();
@@ -265,6 +266,7 @@ function toggleFaq(element) {
             }
         });
     });
+    */
 
     // Download Checklist (Placeholder for actual PDF generation)
     function downloadChecklist() {
