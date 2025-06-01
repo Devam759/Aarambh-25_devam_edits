@@ -146,6 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    initLoadingScreen();
 });
 
 // Utility functions
@@ -448,7 +450,7 @@ document.addEventListener('DOMContentLoaded', function () {
         loadingVideo.play().catch(fallbackToProgressBar);
     }
 
-    const VIDEO_DURATION = 15 * 1000; // 15 seconds
+    const VIDEO_DURATION = 15000; // 15 seconds
     const PROGRESS_INTERVAL_TIME = VIDEO_DURATION / 100; // 150ms per %
 
     // Initial state
@@ -881,3 +883,144 @@ function initAllSmoothEnhancements() {
 
 // AUTO-INITIALIZE
 initAllSmoothEnhancements();
+
+// Loading Screen Functionality
+function initLoadingScreen() {
+    const loadingSection = document.getElementById('loadingSection');
+    const loadingVideo = document.getElementById('loadingVideo');
+    const skipButton = document.getElementById('skipButton');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const loadingPercentage = document.getElementById('loadingPercentage');
+    const mainContent = document.querySelector('.Main-content');
+    let loadingComplete = false;
+
+    // Check if animation has been shown in this session
+    const hasSeenAnimation = sessionStorage.getItem('hasSeenAnimation');
+
+    if (hasSeenAnimation) {
+        // If animation has been shown, hide loading section and show main content immediately
+        if (loadingSection) loadingSection.style.display = 'none';
+        if (mainContent) {
+            mainContent.style.display = 'block';
+            mainContent.style.opacity = '1';
+        }
+        return;
+    }
+
+    let progressInterval;
+    let currentProgress = 0;
+    let videoStarted = false;
+
+    const VIDEO_DURATION = 15000; // 15 seconds
+    const PROGRESS_INTERVAL_TIME = VIDEO_DURATION / 100; // 150ms per %
+
+    // Initial state
+    if (loadingSection) loadingSection.style.display = 'block';
+    if (mainContent) {
+        mainContent.style.display = 'none';
+    }
+
+    // Progress bar logic
+    function startProgressBar() {
+        if (progressInterval) return;
+
+        progressInterval = setInterval(() => {
+            if (currentProgress < 100) {
+                currentProgress++;
+                if (progressFill) progressFill.style.width = `${currentProgress}%`;
+                if (loadingPercentage) loadingPercentage.textContent = `${currentProgress}%`;
+            } else {
+                clearInterval(progressInterval);
+                completeLoading();
+            }
+        }, PROGRESS_INTERVAL_TIME);
+    }
+
+    // Transition to main content
+    function completeLoading() {
+        if (loadingComplete) return;
+        loadingComplete = true;
+
+        // Set flag in sessionStorage
+        sessionStorage.setItem('hasSeenAnimation', 'true');
+
+        if (loadingSection) {
+            loadingSection.style.transition = 'opacity 0.5s ease-out';
+            loadingSection.style.opacity = '0';
+        }
+
+        setTimeout(() => {
+            if (loadingSection) loadingSection.style.display = 'none';
+            if (mainContent) {
+                mainContent.style.display = 'block';
+                mainContent.style.opacity = '0';
+                mainContent.style.transition = 'opacity 0.5s ease-in';
+                setTimeout(() => {
+                    mainContent.style.opacity = '1';
+                }, 10);
+            }
+        }, 500);
+    }
+
+    // Video event handlers
+    if (loadingVideo) {
+        loadingVideo.addEventListener('playing', () => {
+            if (!videoStarted) {
+                videoStarted = true;
+                startProgressBar();
+            }
+        });
+
+        loadingVideo.addEventListener('ended', () => {
+            if (!loadingComplete) {
+                currentProgress = 100;
+                if (progressFill) progressFill.style.width = '100%';
+                if (loadingPercentage) loadingPercentage.textContent = '100%';
+                clearInterval(progressInterval);
+                setTimeout(completeLoading, 500);
+            }
+        });
+
+        loadingVideo.addEventListener('error', (e) => {
+            console.error('Video loading error:', e);
+            fallbackToProgressBar();
+        });
+    }
+
+    if (skipButton) {
+        skipButton.addEventListener('click', () => {
+            if (progressInterval) clearInterval(progressInterval);
+            completeLoading();
+        });
+    }
+
+    function fallbackToProgressBar() {
+        if (!videoStarted) {
+            console.warn('Falling back to progress bar...');
+            videoStarted = true;
+            startProgressBar();
+        }
+    }
+
+    // Force progress bar after 5s if video doesn't autoplay
+    setTimeout(fallbackToProgressBar, 5000);
+
+    // Autoplay video
+    if (loadingVideo) {
+        const playPromise = loadingVideo.play();
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    console.log('Autoplay started');
+                })
+                .catch((error) => {
+                    console.warn('Autoplay blocked, using fallback:', error);
+                    fallbackToProgressBar();
+                });
+        }
+    }
+}
+
+// Initialize loading screen when DOM is loaded
+document.addEventListener('DOMContentLoaded', initLoadingScreen);
